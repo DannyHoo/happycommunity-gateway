@@ -1,4 +1,4 @@
-package com.happycommunity.gateway.controller;
+package com.happycommunity.gateway.controller.test;
 
 import com.alibaba.fastjson.JSON;
 import com.happycommunity.framework.core.model.enums.ResultStatusEnum;
@@ -17,8 +17,8 @@ import java.util.Random;
  * @Created on 2018-11-23 16:36:40
  */
 @Controller
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/public/test")
+public class PublicTestController {
 
     @RequestMapping("/getRandomData")
     @ResponseBody

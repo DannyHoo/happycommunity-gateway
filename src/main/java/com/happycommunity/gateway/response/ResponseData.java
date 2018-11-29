@@ -1,7 +1,7 @@
 package com.happycommunity.gateway.response;
 
-import com.happycommunity.framework.core.model.enums.ResultStatusEnum;
-import com.happycommunity.framework.core.model.enums.ResultStatusEnumInterface;
+
+import com.happycommunity.framework.common.model.enums.ResultStatusEnumInterface;
 
 /**
  * @author Danny
@@ -14,7 +14,7 @@ public class ResponseData {
     private String message;
     private Object data;
 
-    public ResponseData(ResultStatusEnumInterface resultStatusEnumInterface,Object data) {
+    public ResponseData(ResultStatusEnumInterface resultStatusEnumInterface, Object data) {
         this.code=resultStatusEnumInterface.getCode();
         this.message=resultStatusEnumInterface.getDescription();
         this.data = data;
