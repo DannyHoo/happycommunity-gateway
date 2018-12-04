@@ -1,12 +1,20 @@
 package com.happycommunity.gateway.controller.app.user;
 
 import com.happycommunity.business.api.user.UserBusinessService;
+import com.happycommunity.business.model.parameter.LoginParameter;
+import com.happycommunity.business.model.parameter.RegisterParameter;
+import com.happycommunity.business.model.result.LoginResult;
+import com.happycommunity.business.model.result.RegisterResult;
+import com.happycommunity.framework.common.model.result.ServiceResult;
+import com.happycommunity.framework.core.util.BeanUtil;
 import com.happycommunity.gateway.request.app.user.LoginRequest;
 import com.happycommunity.gateway.request.app.user.RegisterRequest;
 import com.happycommunity.gateway.response.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,13 +31,17 @@ public class UserController {
     @Autowired
     private UserBusinessService userBusinessService;
 
-    @RequestMapping
-    public ResponseData register(HttpServletRequest request, RegisterRequest registerRequest){
-        return new ResponseData(null,null);
+    @RequestMapping("/register")
+    @ResponseBody
+    public ResponseData register(HttpServletRequest request, @RequestBody RegisterRequest registerRequest) {
+        ServiceResult<RegisterResult> registerResult = userBusinessService.register(BeanUtil.convertIgnoreNullProperty(registerRequest, RegisterParameter.class));
+        return new ResponseData(registerResult);
     }
 
-    @RequestMapping
-    public ResponseData login(HttpServletRequest request, LoginRequest loginRequest){
-        return new ResponseData(null,null);
+    @RequestMapping("/login")
+    @ResponseBody
+    public ResponseData login(HttpServletRequest request, @RequestBody LoginRequest loginRequest) {
+        ServiceResult<LoginResult> loginResult = userBusinessService.login(BeanUtil.convertIgnoreNullProperty(loginRequest, LoginParameter.class));
+        return new ResponseData(loginResult);
     }
 }

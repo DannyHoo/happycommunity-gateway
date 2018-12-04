@@ -10,7 +10,7 @@ import com.happycommunity.gateway.request.CommonRequest;
  */
 public class RegisterRequest extends CommonRequest {
     private String userName;
-    private String rsaPassword;
+    private String password;
 
     public String getUserName() {
         return userName;
@@ -21,12 +21,12 @@ public class RegisterRequest extends CommonRequest {
         return this;
     }
 
-    public String getRsaPassword() {
-        return rsaPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public RegisterRequest setRsaPassword(String rsaPassword) {
-        this.rsaPassword = rsaPassword;
+    public RegisterRequest setPassword(String password) {
+        this.password = password;
         return this;
     }
 }

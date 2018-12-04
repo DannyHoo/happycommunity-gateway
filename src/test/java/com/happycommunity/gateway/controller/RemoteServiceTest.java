@@ -2,7 +2,9 @@ package com.happycommunity.gateway.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.happycommunity.business.api.user.UserBusinessService;
+import com.happycommunity.business.model.parameter.LoginParameter;
 import com.happycommunity.framework.common.model.dto.user.UserDTO;
+import com.happycommunity.framework.common.model.result.ServiceResult;
 import com.happycommunity.gateway.AbstractTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class RemoteServiceTest extends AbstractTest {
 
     @Test
     public void findUserTest(){
-        UserDTO userDTO=userBusinessService.login(new UserDTO().setUserName("Danny"));
-        System.out.println(JSON.toJSONString(userDTO));
+        ServiceResult loginResult=userBusinessService.login(new LoginParameter().setUserName("Danny"));
+        System.out.println(JSON.toJSONString(loginResult));
     }
 }
