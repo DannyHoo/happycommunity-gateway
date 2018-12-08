@@ -5,7 +5,9 @@ import com.happycommunity.business.model.parameter.LoginParameter;
 import com.happycommunity.business.model.parameter.RegisterParameter;
 import com.happycommunity.business.model.result.LoginResult;
 import com.happycommunity.business.model.result.RegisterResult;
+import com.happycommunity.framework.common.model.model.GlobalTraceData;
 import com.happycommunity.framework.common.model.result.ServiceResult;
+import com.happycommunity.framework.core.log.trace.GlobalTraceDataHandler;
 import com.happycommunity.framework.core.util.BeanUtil;
 import com.happycommunity.gateway.request.app.user.LoginRequest;
 import com.happycommunity.gateway.request.app.user.RegisterRequest;
@@ -34,14 +36,18 @@ public class UserController {
     @RequestMapping("/register")
     @ResponseBody
     public ResponseData register(HttpServletRequest request, @RequestBody RegisterRequest registerRequest) {
-        ServiceResult<RegisterResult> registerResult = userBusinessService.register(BeanUtil.convertIgnoreNullProperty(registerRequest, RegisterParameter.class));
+        RegisterParameter registerParameter = BeanUtil.convertIgnoreNullProperty(registerRequest, RegisterParameter.class);
+        registerParameter.copyProperties(GlobalTraceDataHandler.getGlobalTraceData());
+        ServiceResult<RegisterResult> registerResult = userBusinessService.register(registerParameter);
         return new ResponseData(registerResult);
     }
 
     @RequestMapping("/login")
     @ResponseBody
     public ResponseData login(HttpServletRequest request, @RequestBody LoginRequest loginRequest) {
-        ServiceResult<LoginResult> loginResult = userBusinessService.login(BeanUtil.convertIgnoreNullProperty(loginRequest, LoginParameter.class));
+        LoginParameter loginParameter = BeanUtil.convertIgnoreNullProperty(loginRequest, LoginParameter.class);
+        loginParameter.copyProperties(GlobalTraceDataHandler.getGlobalTraceData());
+        ServiceResult<LoginResult> loginResult = userBusinessService.login(loginParameter);
         return new ResponseData(loginResult);
     }
 }
