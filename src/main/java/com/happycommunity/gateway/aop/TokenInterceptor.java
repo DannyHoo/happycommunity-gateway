@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Danny
- * @Title: LogInterceptor
+ * @Title: TokenInterceptor
  * @Description:
  * @Created on 2018-11-23 16:28:41
  */
-public class LogInterceptor extends AbstractInterceptor{
+public class TokenInterceptor extends AbstractInterceptor{
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         return true;

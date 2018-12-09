@@ -15,4 +15,15 @@
 
 	<import resource="classpath:/spring/service-dubbo-consumer.xml"/>
 
+	<aop:config>
+		<aop:aspect id="aspectController" ref="systemLogAspect">
+			<aop:pointcut id="logController"
+						  expression="within(com.happycommunity.gateway.controller..*)" />
+			<aop:around pointcut-ref="logController" method="logTrace" />
+			<aop:after-throwing pointcut-ref="logController" method="afterThrowing"/>
+		</aop:aspect>
+	</aop:config>
+	<bean id="systemLogAspect" class="com.happycommunity.gateway.aop.SystemLogAspect">
+
+	</bean>
 </beans>

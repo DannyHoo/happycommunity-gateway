@@ -4,7 +4,6 @@
        xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
@@ -24,10 +23,10 @@
 
     <!-- AOP -->
     <mvc:interceptors>
-        <!--日志跟踪拦截-->
+        <!--Token拦截-->
         <mvc:interceptor>
             <mvc:mapping path="/**" />
-            <bean class="com.happycommunity.gateway.aop.LogInterceptor"></bean>
+            <bean class="com.happycommunity.gateway.aop.TokenInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

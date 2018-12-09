@@ -12,6 +12,8 @@ import com.happycommunity.framework.core.util.BeanUtil;
 import com.happycommunity.gateway.request.app.user.LoginRequest;
 import com.happycommunity.gateway.request.app.user.RegisterRequest;
 import com.happycommunity.gateway.response.ResponseData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +41,8 @@ public class UserController {
         RegisterParameter registerParameter = BeanUtil.convertIgnoreNullProperty(registerRequest, RegisterParameter.class);
         registerParameter.copyProperties(GlobalTraceDataHandler.getGlobalTraceData());
         ServiceResult<RegisterResult> registerResult = userBusinessService.register(registerParameter);
+        Logger logger= LoggerFactory.getLogger("com.happycommunity.gateway.controller");
+        logger.info("dfdfdfd");
         return new ResponseData(registerResult);
     }
 

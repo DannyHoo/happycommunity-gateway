@@ -15,7 +15,7 @@
         <jetty.version>9.2.17.v20160517</jetty.version><!--9.4.3.v20170317-->
         <spring-version>4.2.5.RELEASE</spring-version>
         <slf4j-version>1.7.6</slf4j-version>
-        <logback-version>1.0.13</logback-version>
+        <logback-version>1.1.9</logback-version>
         <fastjson.version>1.2.7</fastjson.version>
         <fasterxml.version>2.4.1</fasterxml.version>
         <dubbo.version>2.4.10</dubbo.version>
@@ -28,6 +28,12 @@
             <groupId>com.happycommunity.framework</groupId>
             <artifactId>framework-core</artifactId>
             <version>${framework.version}</version>
+            <exclusions>
+                <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.happycommunity.business</groupId>
@@ -209,18 +215,12 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback-version}</version>
         </dependency>
-        <!-- 是用来把Spring源代码中大量使用到的commons-logging替换成slf4j，
-    只有在添加了这个依赖之后才能看到Spring框架本身打印的日志，否则只能看到开发者自己打印的日志 -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-version}</version>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>0.1.4</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j-version}</version>
-        </dependency>
+
 
     </dependencies>
 
