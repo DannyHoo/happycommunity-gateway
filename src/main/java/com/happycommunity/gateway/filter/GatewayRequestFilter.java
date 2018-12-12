@@ -1,5 +1,6 @@
 package com.happycommunity.gateway.filter;
 
+import com.alibaba.dubbo.rpc.RpcContext;
 import com.happycommunity.framework.common.model.model.GlobalTraceData;
 import com.happycommunity.framework.core.log.trace.GlobalTraceDataHandler;
 import com.happycommunity.framework.core.util.IPUtils;
@@ -8,6 +9,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -47,12 +50,25 @@ public class GatewayRequestFilter implements Filter {
                 .setgRequestIp(this.getRemoteIp(httpServletRequest))
                 .setgRequestUrl(this.getRequestUrl(httpServletRequest));
         GlobalTraceDataHandler.setGlobalTraceData(globalTraceData);
+        setDubboContext(globalTraceData);
         return globalTraceData;
+    }
+
+    private void setDubboContext(GlobalTraceData globalTraceData) {
+        Map<String, String> context = new HashMap<String, String>();
+        context.put("gRequestId", globalTraceData.getgRequestId());
+        context.put("gBusinessId", globalTraceData.getgBusinessId());
+        context.put("gDeviceId", globalTraceData.getgDeviceId());
+        context.put("gRequestSource", globalTraceData.getgRequestSource());
+        context.put("gUserAgent", globalTraceData.getgUserAgent());
+        context.put("gRequestUrl", globalTraceData.getgRequestUrl());
+        context.put("gRequestIp", globalTraceData.getgRequestIp());
+        context.put("gAppClientVersion", globalTraceData.getgAppClientVersion());
+        RpcContext.getContext().setAttachments(context);
     }
 
     protected String getDeviceId(HttpServletRequest request) {
         return UUID.randomUUID().toString();
-        //return request.getHeader("deviceId");
     }
 
     protected String getRequestUrl(HttpServletRequest request) {

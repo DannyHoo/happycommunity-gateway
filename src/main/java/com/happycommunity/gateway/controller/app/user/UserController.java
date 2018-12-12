@@ -39,10 +39,7 @@ public class UserController {
     @ResponseBody
     public ResponseData register(HttpServletRequest request, @RequestBody RegisterRequest registerRequest) {
         RegisterParameter registerParameter = BeanUtil.convertIgnoreNullProperty(registerRequest, RegisterParameter.class);
-        registerParameter.copyProperties(GlobalTraceDataHandler.getGlobalTraceData());
         ServiceResult<RegisterResult> registerResult = userBusinessService.register(registerParameter);
-        Logger logger= LoggerFactory.getLogger("com.happycommunity.gateway.controller");
-        logger.info("dfdfdfd");
         return new ResponseData(registerResult);
     }
 
@@ -50,7 +47,6 @@ public class UserController {
     @ResponseBody
     public ResponseData login(HttpServletRequest request, @RequestBody LoginRequest loginRequest) {
         LoginParameter loginParameter = BeanUtil.convertIgnoreNullProperty(loginRequest, LoginParameter.class);
-        loginParameter.copyProperties(GlobalTraceDataHandler.getGlobalTraceData());
         ServiceResult<LoginResult> loginResult = userBusinessService.login(loginParameter);
         return new ResponseData(loginResult);
     }
